@@ -6,7 +6,7 @@ def main():
     audio_length_ms = audio_length * 1000
     data_overlap = 50  # 퍼센트
     data_overlap_ps = data_overlap / 100
-    sampling_rate = 8192
+    sampling_rate = 16384
 
     os.makedirs("data_folder/wav_data", exist_ok=True)
     os.makedirs("data_folder/mp3_data", exist_ok=True)

@@ -28,7 +28,7 @@ class Generator(nn.Module):
         self.conv2d_8 = nn.Conv2d(512, 512, 3, 1, 1)
         self.act_8 = nn.LeakyReLU(0.2, inplace=True)
         self.dropout_8 = nn.Dropout(p=0.3)
-        self.transconv2d_1 = nn.ConvTranspose2d(512, 1, 3, 1, 1)
+        self.trans_conv2d_1 = nn.ConvTranspose2d(512, 1, 3, 1, 1)
 
     def forward(self, x):
         x = self.dropout_1(self.act_1(self.conv2d_1(x)))
@@ -39,7 +39,7 @@ class Generator(nn.Module):
         x = self.dropout_6(self.act_6(self.conv2d_6(x))) + x
         x = self.dropout_7(self.act_7(self.conv2d_7(x)))
         x = self.dropout_8(self.act_8(self.conv2d_8(x))) + x
-        x = self.transconv2d_1(x)
+        x = self.trans_conv2d_1(x)
 
         return x
 

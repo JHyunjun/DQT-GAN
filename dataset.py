@@ -1,24 +1,9 @@
 import os
 import torch
-import torch.nn as nn
 import librosa
 import numpy as np
 from torch.utils.data import Dataset
-
-
-def make_noise(gray, std: float = 0.2):
-    channel, height, width = gray.shape
-    img_noise = np.zeros((height, width))
-    for i in range(height):
-        for a in range(width):
-            noise = np.random.normal()
-            set_noise = std * noise
-            img_noise[i][a] = gray[0][i][a] + set_noise
-
-    img_noise = np.expand_dims(img_noise, axis=0)
-    img_noise = torch.tensor(img_noise).float()
-
-    return img_noise
+from utils import make_noise
 
 
 class WavDataset(Dataset):

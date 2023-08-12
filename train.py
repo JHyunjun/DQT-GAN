@@ -56,7 +56,7 @@ def train(device,
             generator.zero_grad()
             g_loss.backward()
             optimizer_G.step()
-        torch.save(generator.state_dict(), save_path + 'bestDQTGAN_{}'.format(epoch))
+        torch.save(generator.state_dict(), save_path + 'bestDQTGAN_{}.pth'.format(epoch))
         print(f'Epoch [{epoch + 1}/{num_epochs}], d_loss: {d_loss.item():.6f}, g_loss: {g_loss.item():.6f}')
 
 
