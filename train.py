@@ -63,9 +63,9 @@ def train(device,
 def main():
     device = "cuda"
     batch_size = 4
-    discriminator_loss = 1e-5
-    generator_loss = 5e-6
-    num_epochs = 30
+    discriminator_lr = 1e-5
+    generator_lr = 5e-6
+    num_epochs = 100
     gradient_penalty_constant = 1
     discriminator_updates_per_generator_update = 1
 
@@ -76,13 +76,15 @@ def main():
     mp3_loader = DataLoader(mp3_dataset, batch_size=batch_size, shuffle=False)
 
     generator = Generator().to(device)
+    generator.load_state_dict(torch.load('ckpt/bestDQTGAN_100.pth'))
     discriminator = Discriminator().to(device)
 
-    optimizer_G = optim.Adam(generator.parameters(), lr=discriminator_loss)
-    optimizer_D = optim.RMSprop(discriminator.parameters(), lr=generator_loss)
+    optimizer_G = optim.Adam(generator.parameters(), lr=discriminator_lr)
+    optimizer_D = optim.RMSprop(discriminator.parameters(), lr=generator_lr)
 
     save_path = 'ckpt/'
 
+    print("Start Training...")
     train(device,
           wav_loader,
           mp3_loader,
